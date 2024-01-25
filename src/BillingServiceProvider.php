@@ -123,7 +123,7 @@ class BillingServiceProvider extends AbstractSeatPlugin
 
     public function getPackageRepositoryUrl(): string
     {
-        return 'https://github.com/recursivetree/seat-billing';
+        return 'https://github.com/hermesdj/seat-billing';
     }
 
     public function getPackagistPackageName(): string
@@ -133,6 +133,6 @@ class BillingServiceProvider extends AbstractSeatPlugin
 
     public function getPackagistVendorName(): string
     {
-        return 'recursivetree';
+        return 'hermesdj';
     }
 }
