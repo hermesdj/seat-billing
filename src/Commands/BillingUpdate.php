@@ -27,7 +27,7 @@ class BillingUpdate extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         //ensure we update the last month
         $year = date('Y', strtotime('-1 month'));

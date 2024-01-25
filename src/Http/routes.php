@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 Route::group([
     'namespace' => 'Denngarr\Seat\Billing\Http\Controllers',
     'prefix' => 'billing',

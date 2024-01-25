@@ -7,7 +7,8 @@ use Seat\Eveapi\Models\Corporation\CorporationInfo;
 
 trait TaxProcessingHelper
 {
-    private function handleOverPayment($user, $reason, $amount, $corporation_id, $character_id, $code){
+    private function handleOverPayment($user, $reason, $amount, $corporation_id, $character_id, $code): void
+    {
         // this means someone has paid, but there is no open invoice
         // add an overpaid tax entry
         $invoice = new TaxInvoice();

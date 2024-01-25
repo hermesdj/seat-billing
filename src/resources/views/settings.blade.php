@@ -14,10 +14,10 @@
             <div class="card-body">
                 @csrf
 
-                <h4>Basic Settings</h4>
+                <h4>{{ trans('billing::settings.basic_settings_header') }}</h4>
 
                 <div class="form-group">
-                    <label for="oremodifier">Ore value modifier</label>
+                    <label for="oremodifier">{{ trans('billing::settings.ore_value_modifier_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="oremodifier" id="oremodifier"
                                value="{{ setting('oremodifier', true) }}"/>
@@ -26,7 +26,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="refinerate">Ore Refining Rate</label>
+                    <label for="refinerate">{{ trans('billing::settings.ore_refining_rate_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="refinerate" id="refinerate" size="4"
                                value="{{ setting('refinerate', true) }}"/>
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="bountytaxrate">Bounty TAX Rate</label>
+                    <label for="bountytaxrate">{{ trans('billing::settings.bounty_tax_rate_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="bountytaxrate" id="bountytaxrate"
                                value="{{ setting('bountytaxrate', true) }}"/>
@@ -45,10 +45,10 @@
 
                 <hr>
 
-                <h4>Incentivized Settings</h4>
+                <h4>{{ trans('billing::settings.incentive_settings_header') }}</h4>
 
                 <div class="form-group">
-                    <label for="ioremodifier">Ore value modifier</label>
+                    <label for="ioremodifier">{{ trans('billing::settings.incentive_ore_value_modifier_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="ioremodifier" id="ioremodifier"
                                value="{{ setting('ioremodifier', true) }}"/>
@@ -57,7 +57,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="ioretaxmodifier">Ore Tax Modifier</label>
+                    <label for="ioretaxmodifier">{{ trans('billing::settings.incentive_ore_refining_rate_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="ioretaxmodifier" id="ioretaxmodifier"
                                value="{{ setting('ioretaxmodifier', true) }}"/>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="ibountytaxmodifier">Bounty Tax Modifier</label>
+                    <label for="ibountytaxmodifier">{{ trans('billing::settings.incentive_bounty_tax_rate_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="ibountytaxmodifier" id="ibountytaxmodifier"
                                value="{{ setting('ibountytaxmodifier', true) }}"/>
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="irate">Rates Threshold</label>
+                    <label for="irate">{{ trans('billing::settings.rate_threshold_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="irate" id="irate"
                                value="{{ setting('irate', true) }}"/>
@@ -85,22 +85,22 @@
 
                 <hr/>
 
-                <h4>Valuation of Ore</h4>
+                <h4>{{ trans('billing::settings.valuation_of_ore_header') }}</h4>
 
                 <div class="form-group">
-                    <label>Valuation Mode</label>
+                    <label>{{ trans('billing::settings.valuation_mode_label') }}</label>
                     @if (setting('pricevalue', true) == "m")
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="pricevalue" id="pricevalue1" value="o">
                             <label class="form-check-label" for="pricevalue1">
-                                Value at Ore Price
+                                {{ trans('billing::settings.value_at_ore_price_label') }}
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="pricevalue" id="pricevalue2" value="m"
                                    checked>
                             <label class="form-check-label" for="pricevalue2">
-                                Value at Mineral Price
+                                {{ trans('billing::settings.value_at_mineral_price_label') }}
                             </label>
                         </div>
                     @else
@@ -108,13 +108,13 @@
                             <input class="form-check-input" type="radio" name="pricevalue" id="pricevalue1" value="o"
                                    checked>
                             <label class="form-check-label" for="pricevalue1">
-                                Value at Ore Price
+                                {{ trans('billing::settings.value_at_ore_price_label') }}
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="pricevalue" id="pricevalue2" value="m">
                             <label class="form-check-label" for="pricevalue2">
-                                Value at Mineral Price
+                                {{ trans('billing::settings.value_at_mineral_price_label') }}
                             </label>
                         </div>
                     @endif
@@ -123,37 +123,41 @@
                 <div class="form-group">
                     <label>Price Source</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pricesource" id="pricesource1" value="sell_price" @checked(setting("price_source", true)==="sell_price")>
+                        <input class="form-check-input" type="radio" name="pricesource" id="pricesource1"
+                               value="sell_price" @checked(setting("price_source", true)==="sell_price")>
                         <label class="form-check-label" for="pricesource1">
-                            Value at Sell Price
+                            {{ trans('billing::settings.value_at_sell_price_label') }}
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pricesource" id="pricesource2" value="buy_price" @checked(setting("price_source", true)==="buy_price")>
+                        <input class="form-check-input" type="radio" name="pricesource" id="pricesource2"
+                               value="buy_price" @checked(setting("price_source", true)==="buy_price")>
                         <label class="form-check-label" for="pricesource2">
-                            Value at Buy Price
+                            {{ trans('billing::settings.value_at_buy_price_label') }}
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pricesource" id="pricesource3" value="adjusted_price" @checked(setting("price_source", true)==="adjusted_price")>
+                        <input class="form-check-input" type="radio" name="pricesource" id="pricesource3"
+                               value="adjusted_price" @checked(setting("price_source", true)==="adjusted_price")>
                         <label class="form-check-label" for="pricesource3">
-                            Value at CCP Price
+                            {{ trans('billing::settings.value_at_ccp_price_label') }}
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="pricesource" id="pricesource4" value="average_price" @checked(setting("price_source", true)==="average_price")>
+                        <input class="form-check-input" type="radio" name="pricesource" id="pricesource4"
+                               value="average_price" @checked(setting("price_source", true)==="average_price")>
                         <label class="form-check-label" for="pricesource4">
-                            Value at CCP Market Price (old default)
+                            {{ trans('billing::settings.value_at_ccp_market_price_label') }}
                         </label>
                     </div>
                 </div>
 
                 <hr>
 
-                <h4>Ore Tax</h4>
+                <h4>{{ trans('billing::settings.ore_tax_header') }}</h4>
 
                 <div class="form-group">
-                    <label for="r64taxmodifier">R64 Tax</label>
+                    <label for="r64taxmodifier">{{ trans('billing::settings.r64_tax_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="r64taxmodifier" id="r64taxmodifier"
                                value="{{ $ore_tax->firstWhere("group_id",1923)->tax_rate ?? 0}}"/>
@@ -162,7 +166,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="r32taxmodifier">R32 Tax</label>
+                    <label for="r32taxmodifier">{{ trans('billing::settings.r32_tax_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="r32taxmodifier" id="r32taxmodifier"
                                value="{{ $ore_tax->firstWhere("group_id",1922)->tax_rate ?? 0}}"/>
@@ -171,7 +175,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="r16taxmodifier">R16 Tax</label>
+                    <label for="r16taxmodifier">{{ trans('billing::settings.r16_tax_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="r16taxmodifier" id="r16taxmodifier"
                                value="{{ $ore_tax->firstWhere("group_id",1921)->tax_rate ?? 0}}"/>
@@ -180,7 +184,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="r8taxmodifier">R8 Tax</label>
+                    <label for="r8taxmodifier">{{ trans('billing::settings.r8_tax_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="r8taxmodifier" id="r8taxmodifier"
                                value="{{ $ore_tax->firstWhere("group_id",1920)->tax_rate ?? 0}}"/>
@@ -189,7 +193,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="r4taxmodifier">R4 Tax</label>
+                    <label for="r4taxmodifier">{{ trans('billing::settings.r4_tax_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="r4taxmodifier" id="r4taxmodifier"
                                value="{{ $ore_tax->firstWhere("group_id",1884)->tax_rate ?? 0}}"/>
@@ -198,7 +202,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="gastax">Gas Tax</label>
+                    <label for="gastax">{{ trans('billing::settings.gas_tax_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="gastax" id="gastax"
                                value="{{ $ore_tax->firstWhere("group_id",711)->tax_rate ?? 0}}"/>
@@ -207,7 +211,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="icetax">Ice Tax</label>
+                    <label for="icetax">{{ trans('billing::settings.ice_tax_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="icetax" id="icetax"
                                value="{{ $ore_tax->firstWhere("group_id",465)->tax_rate ?? 0}}"/>
@@ -216,7 +220,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="oretaxrate">Other Ores Tax</label>
+                    <label for="oretaxrate">{{ trans('billing::settings.other_ores_tax_label') }}</label>
                     <div class="d-flex flex-row align-items-baseline">
                         <input class="form-control" type="number" name="oretaxrate" id="oretaxrate" size="4"
                                value="{{ setting('oretaxrate', true) }}"/>
@@ -229,57 +233,60 @@
 
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tax_invoices" id="tax_invoices1" value="enabled" @checked(\Denngarr\Seat\Billing\BillingSettings::$GENERATE_TAX_INVOICES->get(false)===true)>
+                        <input class="form-check-input" type="radio" name="tax_invoices" id="tax_invoices1"
+                               value="enabled" @checked(\Denngarr\Seat\Billing\BillingSettings::$GENERATE_TAX_INVOICES->get(false)===true)>
                         <label class="form-check-label" for="tax_invoices1">
-                            Enable Tax Invoices
+                            {{ trans("billing::billing.enable_tax_invoices_label") }}
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tax_invoices" id="tax_invoices2" value="disabled" @checked(\Denngarr\Seat\Billing\BillingSettings::$GENERATE_TAX_INVOICES->get(false)===false)>
+                        <input class="form-check-input" type="radio" name="tax_invoices" id="tax_invoices2"
+                               value="disabled" @checked(\Denngarr\Seat\Billing\BillingSettings::$GENERATE_TAX_INVOICES->get(false)===false)>
                         <label class="form-check-label" for="tax_invoices2">
-                            Disable Tax Invoices
+                            {{ trans("billing::billing.disable_tax_invoices_label") }}
                         </label>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="whiteListCorps">Corporation Whitelist</label>
-                    <small>Paste one corporation name per line. Leaving this empty disables the whitelist.</small>
-                    <textarea class="form-control" rows="7" style="resize: none;" id="whiteListCorps" name="tax_invoices_whitelist" placeholder="Doomheim&#10;C C P">{{$whitelist}}</textarea>
+                    <label for="whiteListCorps">{{ trans("billing::billing.corporation_whitelist_label") }}</label>
+                    <small>{{ trans("billing::billing.corporation_whitelist_desc") }}</small>
+                    <textarea class="form-control" rows="7" style="resize: none;" id="whiteListCorps"
+                              name="tax_invoices_whitelist" placeholder="Doomheim&#10;C C P">{{$whitelist}}</textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="whiteListCorps">Invoice Threshold</label>
-                    <small>Character that have to pay less than this value don't have to pay any tax.</small>
-                    <input type="number" class="form-control" name="invoice_threshold" value="{{ \Denngarr\Seat\Billing\BillingSettings::$INVOICE_THRESHOLD->get(0) }}">
+                    <label for="whiteListCorps">{{ trans("billing::billing.invoice_threshold_label") }}</label>
+                    <small>{{ trans("billing::billing.invoice_threshold_desc") }}</small>
+                    <input type="number" class="form-control" name="invoice_threshold"
+                           value="{{ \Denngarr\Seat\Billing\BillingSettings::$INVOICE_THRESHOLD->get(0) }}">
                 </div>
 
                 <div class="form-group">
-                    <label for="holdingCorps">Holding Corps</label><br>
+                    <label for="holdingCorps">{{ trans("billing::billing.holding_corps_label") }}</label><br>
                     <small>
-                        Allows tax payments to other corporations than the tax invoice was issued to.
-                        If no holding corp is specified, only the corp that issued the tax invoice can receive payments.
-                        Multiple holding corporations can be specified.
-                        As soon as one corporation is specified, only the specified corporations can receive payments.
-                        In case that's a different corporation than the corp that issued the invoice, this means the issuing corp CAN'T receive the payment.
-                        Associations are specified like this: <code>corp name -> other corp name</code> and mean they that payments to <code>corp name</code> can cover invoices from <code>other corp name</code>.
+                        {!! trans("billing::billing.holding_corps_desc") !!}
                     </small>
-                    <textarea class="form-control" rows="7" style="resize: none;" id="holdingCorps" name="tax_invoice_holding_corps" placeholder="Doomheim -> C C P">{{$tax_receiver_corps??''}}</textarea>
+                    <textarea class="form-control" rows="7" style="resize: none;" id="holdingCorps"
+                              name="tax_invoice_holding_corps"
+                              placeholder="Doomheim -> C C P">{{$tax_receiver_corps??''}}</textarea>
                 </div>
 
                 <div class="form-group">
-                    <label>Tax Code Visibility</label>
+                    <label>{{ trans("billing::billing.tax_code_visibility") }}</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tax_codes" id="tax_codes1" value="disabled" @checked(\Denngarr\Seat\Billing\BillingSettings::$ALWAYS_SHOW_TAX_CODES->get(false)===false)>
+                        <input class="form-check-input" type="radio" name="tax_codes" id="tax_codes1"
+                               value="disabled" @checked(\Denngarr\Seat\Billing\BillingSettings::$ALWAYS_SHOW_TAX_CODES->get(false)===false)>
                         <label class="form-check-label" for="tax_codes1">
-                            Only show tax codes for invoices that can be paid. <small class="text-muted">This option is recommended.</small>
+                            {!! trans("billing::billing.tax_code_visibility_desc") !!}
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tax_codes" id="tax_codes2" value="enabled" @checked(\Denngarr\Seat\Billing\BillingSettings::$ALWAYS_SHOW_TAX_CODES->get(false)===true)>
+                        <input class="form-check-input" type="radio" name="tax_codes" id="tax_codes2"
+                               value="enabled" @checked(\Denngarr\Seat\Billing\BillingSettings::$ALWAYS_SHOW_TAX_CODES->get(false)===true)>
                         <label class="form-check-label" for="tax_codes2">
-                            Always show tax codes.
-                            <small class="text-muted">By enabling this option, you acknowledge that predictions can't be paid until the end of the month, and you promise not to ask about this on discord.</small>
+                            {{ trans("billing::billing.always_show_tax_codes_label") }}
+                            <small class="text-muted">{{ trans("billing::billing.always_show_tax_codes_desc") }}</small>
                         </label>
                     </div>
                 </div>
@@ -287,7 +294,8 @@
             </div>
 
             <div class="card-footer">
-                <input class="btn btn-success pull-right" type="submit" value="Update">
+                <input class="btn btn-success pull-right" type="submit"
+                       value="{{ trans("billing::billing.update_btn") }}">
             </div>
         </form>
 
@@ -301,73 +309,63 @@
         </div>
         <div class="card-body">
             <div class="col-sm-12">
-                <label>Ore value modifier:</label>
+                <label>{{ trans('billing::settings.ore_value_modifier_label') }}:</label>
                 <p>
-                    This is a modifier used on the base costs of the ore/minerals/goo
-                    to adjust for inflation/deflation during the billing period. Normally this is 90-95%
+                    {{ trans('billing::settings.ore_value_modifier_desc') }}
                 </p>
             </div>
             <div class="col-sm-12">
-                <label>Ore Refining Rate:</label>
+                <label>{{ trans('billing::settings.ore_refining_rate_label') }}:</label>
                 <p>
-                    This should be the max refine amount in your area. Max rates with
-                    RX-804 implant, level V skills, and a T2 Rigged Tatara is 89.4%. Adjust this as you see fit, but I
-                    recommend using the maximum rate available to your members in your area of space.
+                    {{ trans('billing::settings.ore_refining_rate_desc') }}
                 </p>
             </div>
             <div class="col-sm-12">
-                <label>Bounty Tax Rate:</label>
+                <label>{{ trans('billing::settings.bounty_tax_rate_label') }}:</label>
                 <p>
-                    Rate of ratting bounties to tax. Usually 5-10%
+                    {{ trans('billing::settings.bounty_tax_rate_desc') }}
                 </p>
             </div>
             <div class="col-sm-12">
-                <label>Incentivised Settings:</label>
-                <p>Incentivised modifiers are on a per-corporation basis only.
-                    These are modifiers applied to corps where at least a certain number of members (including alts)
-                    have registered on SeAT. If they're not signed up on SeAT, the alliance is not seeing their mining
-                    amounts and missing on tax, therefore the corporation gets higher tax rates.
+                <label>{{ trans('billing::settings.incentive_settings_header') }}:</label>
+                <p>
+                    {{ trans('billing::settings.incentive_settings_desc') }}
                 </p>
             </div>
             <div class="col-sm-12">
-                <label>Incentivised Ore Value Modifier:</label>
+                <label>{{ trans('billing::settings.incentive_ore_value_modifier_label') }}:</label>
                 <p>
-                    Ore Value Modifier to use for corps with incentivised rates.
+                    {{ trans('billing::settings.incentive_ore_value_modifier_desc') }}
                 </p>
             </div>
             <div class="col-sm-12">
-                <label>Incentivised Ore Tax Modifier:</label>
+                <label>{{ trans('billing::settings.incentive_ore_refining_rate_label') }}:</label>
                 <p>
-                    This modifier is applied to the normal tax. With your normal tax at 5 % and the incentivised ore tax
-                    modifier at 50%, your members will have to pay 2.5% tax
+                    {{ trans('billing::settings.incentive_ore_refining_rate_desc') }}
                 </p>
             </div>
             <div class="col-sm-12">
-                <label>Incentivised Bounty Tax Modifier:</label>
+                <label>{{ trans('billing::settings.incentive_bounty_tax_rate_label') }}:</label>
                 <p>
-                    This modifier is applied to the normal tax. With your normal tax at 5 % and the incentivised ore tax
-                    modifier at 50%, your members will have to pay 2.5% tax
+                    {{ trans('billing::settings.incentive_bounty_tax_rate_desc') }}
                 </p>
             </div>
             <div class="col-sm-12">
-                <label>Rates Threshold:</label>
+                <label>{{ trans('billing::settings.rate_threshold_label') }}:</label>
                 <p>
-                    When more than x% of the members of a corp are registered on SeAT, the incentivised settings apply.
+                    {{ trans('billing::settings.rate_threshold_desc') }}
                 </p>
             </div>
             <div class="col-sm-12">
-                <label>Valuation of Ore:</label>
+                <label>{{ trans('billing::settings.valuation_of_ore_header') }}:</label>
                 <p>
-                    Value of ore can be determined with two methods: By ore type OR By
-                    mineral content. If you are moon mining, it's better to use mineral content as it's more accurate as
-                    Moon Goo is rarely sold by the raw ore, but more often as refined products. This keeps the moon
-                    mining honest.
+                    {{ trans('billing::settings.valuation_of_ore_desc') }}
                 </p>
             </div>
             <div class="col-sm-12">
-                <label>Ore Tax:</label>
+                <label>{{ trans('billing::settings.ore_tax_header') }}:</label>
                 <p>
-                    You can specify separate taxes for each category of ore.
+                    {{ trans('billing::settings.ore_tax_desc') }}
                 </p>
             </div>
         </div>

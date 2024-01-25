@@ -12,7 +12,8 @@ class BillingSettings
 
     public static $ALWAYS_SHOW_TAX_CODES;
 
-    public static function init(){
+    public static function init(): void
+    {
         self::$GENERATE_TAX_INVOICES = Setting::create("billing","tax.generate.invoices", true);
         self::$TAX_INVOICE_WHITELIST = Setting::create("billing","tax.whitelist.corporations", true);
         self::$INVOICE_THRESHOLD = Setting::create("billing","tax.invoices.threshold", true);

@@ -4,9 +4,10 @@ namespace Denngarr\Seat\Billing\Observers;
 
 class TaxInvoiceObserver
 {
-    public static function saving($tax_invoice){
+    public static function saving($tax_invoice): true
+    {
         $remaining = $tax_invoice->amount - $tax_invoice->paid;
-        if($remaining < 0){
+        if ($remaining < 0) {
             $tax_invoice->state = "overtaxed";
         } else if ($remaining === 0) {
             $tax_invoice->state = "completed";

@@ -10,9 +10,15 @@ use Denngarr\Seat\Billing\Models\OreTax;
 use Denngarr\Seat\Billing\Models\TaxReceiverCorporation;
 use ErrorException;
 use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Seat\Eveapi\Models\Corporation\CorporationInfo;
 use Seat\Eveapi\Models\RefreshToken;
+use Seat\Services\Exceptions\SettingException;
 use Seat\Web\Http\Controllers\Controller;
 use Denngarr\Seat\Billing\Helpers\BillingHelper;
 use Illuminate\Http\Request;
@@ -22,7 +28,7 @@ class BillingController extends Controller
 {
     use BillingHelper;
 
-    public function getBillingSettings()
+    public function getBillingSettings(): View|Application|Factory
     {
         $ore_tax = OreTax::all();
         $whitelist = implode("\n",collect(BillingSettings::$TAX_INVOICE_WHITELIST->get([]))
@@ -40,7 +46,8 @@ class BillingController extends Controller
 
     const ALLOWED_PRICE_SOURCES = ["sell_price","buy_price","adjusted_price","average_price"];
 
-    public function recalculateMonth(Request $request){
+    public function recalculateMonth(Request $request): RedirectResponse
+    {
         $request->validate([
             'month'=>'required|integer|min:1|max:12',
             'year'=>'required|integer'
@@ -51,7 +58,10 @@ class BillingController extends Controller
         return redirect()->back()->with('success','Successfully scheduled bill recalculation!');
     }
 
-    public function saveBillingSettings(Request $request)
+    /**
+     * @throws SettingException
+     */
+    public function saveBillingSettings(Request $request): RedirectResponse
     {
         $request->validate([
             'oremodifier'       => 'required|integer|min:0|max:200',
@@ -145,14 +155,12 @@ class BillingController extends Controller
         return redirect()->route("billing.settings")->with('success', 'Billing Settings have successfully been updated.');
     }
 
-    public function getCharacterBill($corporation_id, $year, $month)
+    public function getCharacterBill($corporation_id, $year, $month): Collection|array
     {
-        $summary = $this->getCharacterBillByMonth($corporation_id, $year, $month);
-
-        return $summary;
+        return $this->getCharacterBillByMonth($corporation_id, $year, $month);
     }
 
-    public function showCurrentBill()
+    public function showCurrentBill(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $year = date('Y');
         $month = date('n');
@@ -160,7 +168,7 @@ class BillingController extends Controller
         return $this->showBill($year, $month);
     }
 
-    public function showBill($year, $month)
+    public function showBill($year, $month): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
 
         $stats =  CorporationBill::with('corporation.alliance')
@@ -172,15 +180,18 @@ class BillingController extends Controller
         return view('billing::bill', compact('stats', 'dates', 'year', 'month'));
     }
 
-    public function getUserBill(){
+    public function getUserBill(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
         return $this->getUserBillByUserId(auth()->user());
     }
 
-    public function getUserBillByCharacter($character_id){
+    public function getUserBillByCharacter($character_id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
         return $this->getUserBillByUserId(RefreshToken::find($character_id)->user);
     }
 
-    private function getUserBillByUserId($user){
+    private function getUserBillByUserId($user): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
         $months = CharacterBill::where("user_id",$user->id)
             ->orderBy("character_id","ASC")
             ->get()
