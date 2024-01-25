@@ -23,7 +23,7 @@ class BillingServiceProvider extends AbstractSeatPlugin
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->add_routes();
         $this->add_views();
@@ -38,14 +38,14 @@ class BillingServiceProvider extends AbstractSeatPlugin
     /**
      * Include the routes.
      */
-    public function add_routes()
+    public function add_routes(): void
     {
         if (! $this->app->routesAreCached()) {
             include __DIR__ . '/Http/routes.php';
         }
     }
 
-    public function add_translations()
+    public function add_translations(): void
     {
         $this->loadTranslationsFrom(__DIR__ . '/lang', 'billing');
     }
@@ -53,7 +53,7 @@ class BillingServiceProvider extends AbstractSeatPlugin
     /**
      * Set the path and namespace for the views.
      */
-    public function add_views()
+    public function add_views(): void
     {
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'billing');
     }
@@ -63,7 +63,7 @@ class BillingServiceProvider extends AbstractSeatPlugin
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         BillingSettings::init();
 
@@ -75,12 +75,12 @@ class BillingServiceProvider extends AbstractSeatPlugin
         );
     }
 
-    public function add_migrations()
+    public function add_migrations(): void
     {
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations/');
     }
 
-    private function add_commands()
+    private function add_commands(): void
     {
         $this->commands([
             BillingUpdate::class,

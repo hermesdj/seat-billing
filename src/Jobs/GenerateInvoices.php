@@ -37,7 +37,8 @@ class GenerateInvoices implements ShouldQueue
     }
 
 
-    public function handle(){
+    public function handle(): void
+    {
         $update_bills = BillingSettings::$GENERATE_TAX_INVOICES->get(false);
         if(!$update_bills) return;
 

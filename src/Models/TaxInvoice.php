@@ -3,6 +3,7 @@
 namespace Denngarr\Seat\Billing\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Seat\Eveapi\Models\Character\CharacterInfo;
 use Seat\Eveapi\Models\Corporation\CorporationInfo;
 use Seat\Web\Models\User;
@@ -17,15 +18,18 @@ class TaxInvoice extends Model
         'reason_translation_data' => 'array',
     ];
 
-    public function user(){
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class,'user_id','id');
     }
 
-    public function character(){
+    public function character(): BelongsTo
+    {
         return $this->belongsTo(CharacterInfo::class,'character_id','character_id');
     }
 
-    public function receiver_corporation(){
+    public function receiver_corporation(): BelongsTo
+    {
         return $this->belongsTo(CorporationInfo::class,'receiver_corporation_id','corporation_id');
     }
 

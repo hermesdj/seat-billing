@@ -13,6 +13,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Seat\Eveapi\Models\Corporation\CorporationInfo;
+use Seat\Services\Exceptions\SettingException;
 
 class UpdateBills implements ShouldQueue
 {
@@ -34,13 +35,17 @@ class UpdateBills implements ShouldQueue
         $this->month = $month;
     }
 
-    public function tags()
+    public function tags(): array
     {
         return ["seat-billing", "bill",];
     }
 
 
-    public function handle(){
+    /**
+     * @throws SettingException
+     */
+    public function handle(): void
+    {
         $force = $this->force;
         $year = $this->year;
         $month = $this->month;

@@ -26,7 +26,7 @@ class BalanceTaxPayment implements ShouldQueue
         $this->corporation_id = $corporation_id;
     }
 
-    public function tags()
+    public function tags(): array
     {
         return ["seat-billing", "tax",];
     }
@@ -36,7 +36,8 @@ class BalanceTaxPayment implements ShouldQueue
         return [(new WithoutOverlapping($this->user_id ?? rand()))->releaseAfter(10)];
     }
 
-    public function handle(){
+    public function handle(): void
+    {
         $overtaxed_invoices = TaxInvoice::where("user_id", $this->user_id)
             ->where("receiver_corporation_id", $this->corporation_id)
             ->where("state","overtaxed")

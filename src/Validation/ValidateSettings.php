@@ -6,12 +6,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ValidateSettings extends FormRequest
 {
-    public function authorize()
+    public function authorize(): true
     {
         return true;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'oremodifier'    => 'required|integer|min:0|max:200',

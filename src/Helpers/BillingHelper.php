@@ -6,6 +6,7 @@ use Denngarr\Seat\Billing\Http\Controllers\BillingController;
 use Denngarr\Seat\Billing\Models\CharacterBill;
 use Denngarr\Seat\Billing\Models\CorporationBill;
 use Illuminate\Support\Facades\DB;
+use Seat\Services\Exceptions\SettingException;
 use Seat\Services\Models\UserSetting;
 use Seat\Web\Models\User;
 use Illuminate\Support\Collection;
@@ -15,7 +16,10 @@ use Seat\Eveapi\Models\Corporation\CorporationMemberTracking;
 
 trait BillingHelper
 {
-    public function getCharacterBilling($corporation_id, $year, $month)
+    /**
+     * @throws SettingException
+     */
+    public function getCharacterBilling($corporation_id, $year, $month): Collection
     {
         $refineRate = setting("refinerate", true);
         $miningTax = setting('oretaxrate', true);
@@ -74,7 +78,10 @@ trait BillingHelper
         return $ledger;
     }
 
-    public function getUserBilling($corporation_id, $year = null, $month = null)
+    /**
+     * @throws SettingException
+     */
+    public function getUserBilling($corporation_id, $year = null, $month = null): array
     {
         if (is_null($year)) {
             $year = date('Y');
@@ -103,7 +110,11 @@ trait BillingHelper
         return $summary;
     }
 
-    public function isEligibleForIncentivesRates($corporation_id){
+    /**
+     * @throws SettingException
+     */
+    public function isEligibleForIncentivesRates($corporation_id): bool
+    {
         $total_chars = CorporationMemberTracking::where('corporation_id', $corporation_id)->count();
         if ($total_chars == 0) {
             return false;
@@ -120,7 +131,10 @@ trait BillingHelper
         return ($reg_chars / $total_chars) >= (setting('irate', true) / 100);
     }
 
-    private function getCorporationMiningTotal($corporation_id, $year, $month)
+    /**
+     * @throws SettingException
+     */
+    private function getCorporationMiningTotal($corporation_id, $year, $month): array
     {
         $ledgers = $this->getCharacterBilling($corporation_id, $year, $month);
 
@@ -139,7 +153,7 @@ trait BillingHelper
     }
 
 
-    private function getCharacterBillByMonth($corporation_id, $year, $month)
+    private function getCharacterBillByMonth($corporation_id, $year, $month): \Illuminate\Database\Eloquent\Collection|array
     {
         return CharacterBill::query()
             ->select("users.main_character_id as character_id", "character_infos.name as character_name")
@@ -156,9 +170,9 @@ trait BillingHelper
             ->get();
     }
 
-    private function getBountyTotal($year, $month)
+    private function getBountyTotal($year, $month): \Illuminate\Database\Query\Builder
     {
-        $bounty_stats = DB::table('corporation_wallet_journals')
+        return DB::table('corporation_wallet_journals')
             ->select("corporation_wallet_journals.corporation_id")
             ->selectRaw('SUM(amount) / corporation_infos.tax_rate as bounties')
             ->join('corporation_infos', 'corporation_infos.corporation_id', '=', 'corporation_wallet_journals.corporation_id')
@@ -166,8 +180,6 @@ trait BillingHelper
             ->where(DB::raw('YEAR(corporation_wallet_journals.date)'), !is_null($year) ? $year : date('Y'))
             ->where(DB::raw('MONTH(corporation_wallet_journals.date)'), !is_null($month) ? $month : date('m'))
             ->groupBy('corporation_wallet_journals.corporation_id','corporation_infos.tax_rate');
-
-        return $bounty_stats;
     }
 
 }

@@ -24,7 +24,7 @@ class ProcessTaxPayment implements ShouldQueue
         $this->journal_entry = $journal_entry;
     }
 
-    public function tags()
+    public function tags(): array
     {
         return ["seat-billing", "tax",];
     }
@@ -35,7 +35,8 @@ class ProcessTaxPayment implements ShouldQueue
         return [(new WithoutOverlapping($token->user->id ?? rand()))->releaseAfter(10)];
     }
 
-    public function handle(){
+    public function handle(): void
+    {
         $token = RefreshToken::find($this->journal_entry->first_party_id);
         if($token === null) return;
 
