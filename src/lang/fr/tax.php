@@ -46,7 +46,7 @@ return [
     'tax_user_overdue_amount'=>'Impôt en souffrance',
     'tax_user_overdue_amount_desc'=>'Ce montant d\'ISK reste impayé après la date limite',
     'instructions'=>'Instructions',
-    'tax_instructions' => 'Sur cette page, vous avez un aperçu de l\'impôt que vous devez payer. Il existe un tableau pour chaque corporation à laquelle vous devez des impôts., contenant le montant que vous devez payer et l\'état du paiement. Vous pouvez payer vos impôts en transférant les ISK indiqués sous « restant » à la corporation. Assurez-vous d'inclure le code fiscal dans la description du paiement, sinon le paiement ne pourra pas être détecté automatiquement. Une fois le paiement lancé, cela peut prendre jusqu'à une heure avant que le statut du paiement ne change. Cela est dû au fonctionnement d\'ESI, soyez patient.',
+    'tax_instructions' => 'Sur cette page, vous avez un aperçu de l\'impôt que vous devez payer. Il existe un tableau pour chaque corporation à laquelle vous devez des impôts., contenant le montant que vous devez payer et l\'état du paiement. Vous pouvez payer vos impôts en transférant les ISK indiqués sous « restant » à la corporation. Assurez-vous d\'inclure le code fiscal dans la description du paiement, sinon le paiement ne pourra pas être détecté automatiquement. Une fois le paiement lancé, cela peut prendre jusqu\'à une heure avant que le statut du paiement ne change. Cela est dû au fonctionnement d\'ESI, soyez patient.',
     'regenerate_tax_invoices' => 'Régénérer les factures fiscales',
     'month'=>'Mois',
     'regenerate_tax_invoices_desc'=>'Les disques déjà payés ne seront pas perdus.',

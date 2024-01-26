@@ -8,7 +8,7 @@ return [
                     pour ajuster l\'inflation/déflation pendant la période de facturation. Normalement, c\'est 90-95%',
 
     'ore_refining_rate_label' => 'Taux de raffinage du minerai',
-    'ore_refining_rate_desc' => 'Cela devrait être le montant maximum de raffinement dans votre région. Tarifs maximum avec
+    'ore_refining_rate_desc' => 'Cela devrait être le montant maximum de raffinage dans votre région. Tarifs maximum avec
                     implant RX-804, compétences de niveau V, et un T2 Tatara Rigged est 89.4%. Ajustez cela comme bon vous semble, mais je
                     recommande d\'utiliser le tarif maximum disponible à vos membres dans votre zone d\'espace.',
 
